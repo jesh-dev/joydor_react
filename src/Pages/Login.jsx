@@ -3,7 +3,7 @@ import { Nav } from "../Components/Navbar";
 import { Footer } from "../Components/Footer";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
-import axios from "axios"
+import axios from "axios";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +16,7 @@ const Login = () => {
   //function to capture user entry
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const validateForm = () => {
     const newErrors = {};
@@ -24,16 +25,14 @@ const Login = () => {
       newErrors.email = "email is required";
     }
 
-    if (!formData.password.trim()) {
+    if (!formData.password) {
       newErrors.password = "password is required";
-    }else if (formData.password.trim()) {
-      
+    } else if (formData.password.trim()) {
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,18 +43,19 @@ const Login = () => {
     try {
       const response = await axios.post("http://localhost:8000/api/login", {
         email: formData.email.trim(),
-        password: formData.password.trim(),
+        password: formData.password,
       });
       if (response.status === 201) {
         alert(response.data.message);
+        console.log(response.data);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
       }
     } catch (error) {
-      console.log(error);
       alert(error.response.data.message);
-      setErrors(error.response.data.errors);
+      console.log(error);
+      // setErrors(error.response.data.errors);
     }
-  }
-  // };
+  };
   return (
     <>
       <Nav />
@@ -70,6 +70,7 @@ const Login = () => {
           <div className="flex justify-center font-bold text-white">
             <p>Login to your Account</p>
           </div>
+
           <div className="mb-4">
             <label
               htmlFor="email"
@@ -87,14 +88,15 @@ const Login = () => {
               onChange={handleChange}
               className={`shadow appearance-none border rounded 
                 w-full py-2 px-3 text-gray-700 leading-tight bg-white/50
-                focus:bg-white focus:outline-blue-700 focus:shadow-outline${
+                focus:bg-white focus:outline-blue-700 focus:shadow-outline ${
                   errors.email && "border-red-500 focus:outline-red-500"
                 }`}
             />
-             {errors.email && (
+            {errors.email && (
               <p className="mt-2 text-sm text-red-500">{errors.email}</p>
             )}
           </div>
+
           <div className="mb-4">
             <label
               htmlFor="password"
@@ -114,12 +116,12 @@ const Login = () => {
                 className={`shadow appearance-none border rounded 
                   w-full py-2 px-3 text-gray-700 leading-tight bg-white/50
                   focus:bg-white focus:outline-blue-700 focus:shadow-outline${
-                    errors.email && "border-red-500 focus:outline-red-500"
+                    errors.password && "border-red-500 focus:outline-red-500"
                   }`}
               />
-              {errors.email && (
-              <p className="mt-2 text-sm text-red-500">{errors.email}</p>
-            )}
+              {errors.password && (
+                <p className="mt-2 text-sm text-red-500">{errors.password}</p>
+              )}
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}

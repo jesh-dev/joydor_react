@@ -15,7 +15,6 @@ function MyForm() {
     confirmPassword: "",
     // gender: "",
     // role: "",
-    
   });
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
@@ -291,23 +290,21 @@ function MyForm() {
             >
               Gender:
             </label>
-              <select 
-          name="gender" 
-          id="gender"
-          value={formData.gender}
-          onChange={handleChange}
-          className="shadow appearance-none border rounded 
+            <select
+              name="gender"
+              id="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              className="shadow appearance-none border rounded 
             w-full py-2 px-3 text-gray-700 leading-tight bg-white/50
             focus:bg-white focus:outline-blue-700 focus:shadow-outline"
-          >
-            <option value="">--Select Gender--</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
+            >
+              <option value="">--Select Gender--</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
           </div>
-          
-
 
           {/*<div className="mb-4">
             <label
@@ -358,23 +355,20 @@ function MyForm() {
             >
               Role:
             </label>
-            <select 
-          name="role" 
-          id="role"
-          value={formData.role}
-          onChange={handleChange}
-          className="shadow appearance-none border rounded 
+            <select
+              name="role"
+              id="role"
+              value={formData.role}
+              onChange={handleChange}
+              className="shadow appearance-none border rounded 
             w-full py-2 px-3 text-gray-700 leading-tight bg-white/50
              focus:bg-white focus:outline-blue-700 focus:shadow-outline"
-             >
-            <option value="">--Select Role--</option>
-            <option value="user">User</option>
-            <option value="vendor">Vendor</option>
-          </select>
+            >
+              <option value="">--Select Role--</option>
+              <option value="user">User</option>
+              <option value="vendor">Vendor</option>
+            </select>
           </div>
-
-         
-
 
           {/* <div className="mb-4">
             <label
