@@ -3,6 +3,7 @@ import { Nav } from "../Components/Navbar";
 import { Footer } from "../Components/Footer";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
+import axios from "axios"
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +16,6 @@ const Login = () => {
   //function to capture user entry
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const validateForm = () => {
     const newErrors = {};
@@ -26,18 +26,36 @@ const Login = () => {
 
     if (!formData.password.trim()) {
       newErrors.password = "password is required";
+    }else if (formData.password.trim()) {
+      
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) {
       return;
     }
-  };
+
+    try {
+      const response = await axios.post("http://localhost:8000/api/login", {
+        email: formData.email.trim(),
+        password: formData.password.trim(),
+      });
+      if (response.status === 201) {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      alert(error.response.data.message);
+      setErrors(error.response.data.errors);
+    }
+  }
+  // };
   return (
     <>
       <Nav />
@@ -67,10 +85,15 @@ const Login = () => {
               placeholder="Your email"
               value={formData.email}
               onChange={handleChange}
-              className="shadow appearance-none border rounded 
-              w-full py-2 px-3 text-gray-700 leading-tight bg-white/50
-              focus:bg-white focus:outline-blue-700 focus:shadow-outline"
+              className={`shadow appearance-none border rounded 
+                w-full py-2 px-3 text-gray-700 leading-tight bg-white/50
+                focus:bg-white focus:outline-blue-700 focus:shadow-outline${
+                  errors.email && "border-red-500 focus:outline-red-500"
+                }`}
             />
+             {errors.email && (
+              <p className="mt-2 text-sm text-red-500">{errors.email}</p>
+            )}
           </div>
           <div className="mb-4">
             <label
@@ -88,10 +111,15 @@ const Login = () => {
                 placeholder="Your password"
                 value={formData.password}
                 onChange={handleChange}
-                className="shadow appearance-none border rounded 
-          w-full py-2 px-3 text-gray-700 leading-tight bg-white/50
-               focus:bg-white focus:outline-blue-700 focus:shadow-outline"
+                className={`shadow appearance-none border rounded 
+                  w-full py-2 px-3 text-gray-700 leading-tight bg-white/50
+                  focus:bg-white focus:outline-blue-700 focus:shadow-outline${
+                    errors.email && "border-red-500 focus:outline-red-500"
+                  }`}
               />
+              {errors.email && (
+              <p className="mt-2 text-sm text-red-500">{errors.email}</p>
+            )}
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}

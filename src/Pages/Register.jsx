@@ -13,8 +13,9 @@ function MyForm() {
     phone_number: "",
     password: "",
     confirmPassword: "",
-    gender: "",
-    role: "",
+    // gender: "",
+    // role: "",
+    
   });
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
@@ -76,15 +77,17 @@ function MyForm() {
         lastname: formData.lastname.trim(),
         email: formData.email.trim(),
         phone_number: formData.phone_number.trim(),
-        password: formData.password,
-      })
+        password: formData.password.trim(),
+        role: formData.role,
+        gender: formData.gender,
+      });
       if (response.status === 201) {
         alert(response.data.message);
       }
     } catch (error) {
+      console.log(error);
       alert(error.response.data.message);
       setErrors(error.response.data.errors);
-      console.log(error);
     }
   };
   return (
@@ -225,7 +228,7 @@ function MyForm() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute hover:text-white right-3 top-3.5 
+                className="absolute hover:text-blue-600 right-3 top-3.5 
               cursor-pointer"
               >
                 {" "}
@@ -263,8 +266,8 @@ function MyForm() {
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-3 top-3.5 text-black
-                 hover:text-white transition-colors cursor-pointer"
+                className="absolute right-3 top-3.5 tex-black
+                 hover:text-violet-900  transition-colors cursor-pointer"
               >
                 {showConfirmPassword ? (
                   <EyeSlashIcon className="h-5 w-5" />
@@ -283,17 +286,44 @@ function MyForm() {
           {/* gender */}
           <div className="mb-4">
             <label
+              htmlFor="gender"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Gender:
+            </label>
+              <select 
+          name="gender" 
+          id="gender"
+          value={formData.gender}
+          onChange={handleChange}
+          className="shadow appearance-none border rounded 
+            w-full py-2 px-3 text-gray-700 leading-tight bg-white/50
+            focus:bg-white focus:outline-blue-700 focus:shadow-outline"
+          >
+            <option value="">--Select Gender--</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          </div>
+          
+
+
+          {/*<div className="mb-4">
+            <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="gender"
+              onChange={handleChange}
+                
             >
               Gender
-            </label>
+             </label>
             <div className="flex items-center">
               <input
                 type="radio"
                 id="male"
                 name="gender"
-                value="male"
+                value={formData.gender}
                 className="mr-2"
               />
               <label htmlFor="male" className="mr-4">
@@ -304,7 +334,7 @@ function MyForm() {
                 type="radio"
                 id="female"
                 name="gender"
-                value="female"
+                value={formData.gender}
                 className="mr-2"
               />
               <label htmlFor="female">Female</label>
@@ -312,16 +342,44 @@ function MyForm() {
                 type="radio"
                 id="other"
                 name="gender"
-                value="other"
+                value={formData.gender}
                 className="ml-4 mr-2"
               />
-              <label htmlFor="female">Other</label>
+              <label htmlFor="other">Other</label>
             </div>
-          </div>
+          </div> */}
 
           {/* Role */}
+
           <div className="mb-4">
             <label
+              htmlFor="role"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Role:
+            </label>
+            <select 
+          name="role" 
+          id="role"
+          value={formData.role}
+          onChange={handleChange}
+          className="shadow appearance-none border rounded 
+            w-full py-2 px-3 text-gray-700 leading-tight bg-white/50
+             focus:bg-white focus:outline-blue-700 focus:shadow-outline"
+             >
+            <option value="">--Select Role--</option>
+            <option value="user">User</option>
+            <option value="vendor">Vendor</option>
+          </select>
+          </div>
+
+         
+
+
+          {/* <div className="mb-4">
+            <label
+              onChange={handleChange}
+                value={formData.role}
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="gender"
             >
@@ -332,7 +390,7 @@ function MyForm() {
                 type="radio"
                 id="User"
                 name="role"
-                value="role"
+                value="user"
                 className="mr-2"
               />
               <label htmlFor="user" className="mr-4">
@@ -348,7 +406,7 @@ function MyForm() {
               />
               <label htmlFor="vendor">Vendor</label>
             </div>
-          </div>
+          </div> */}
 
           <button
             className="bg-gradient-to-r from-blue-500 
