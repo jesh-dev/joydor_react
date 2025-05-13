@@ -28,6 +28,10 @@ const Login = () => {
     if (!formData.password) {
       newErrors.password = "password is required";
     } else if (formData.password.trim()) {
+      !/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9]{8,}$/.test(
+      formData.password)
+    }else{
+       newErrors.password = 'unsupported password syntax';
     }
 
     setErrors(newErrors);
@@ -41,7 +45,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/login", {
+      const response = await axios.post("http://127.0.0.1:8000/api/login", {
         email: formData.email.trim(),
         password: formData.password,
       });
@@ -53,7 +57,7 @@ const Login = () => {
     } catch (error) {
       alert(error.response.data.message);
       console.log(error);
-      // setErrors(error.response.data.errors);
+      setErrors(error.response.data.errors);
     }
   };
   return (
