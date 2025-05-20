@@ -4,6 +4,7 @@ import Home from './Home';
 import MyForm from './Pages/Register';
 import { Content } from './Pages/Product';
 import Login from './Pages/Login';
+import Verify from './Pages/Verify';
 
 
 const App = () => {
@@ -17,11 +18,7 @@ const App = () => {
                 <Route path="/register" element={<MyForm/>} />
                 <Route path="/product" element={<Content/>} />
                 <Route path="/login" element={<Login/>} />
-                {/* <Route path="/about" element={} />
-                <Route path="/contact" element={} /> */}
-                {/* <Route path="contact" element={<Contact />} />
-                <Route path="*" element={<NoPage />} /> */}
-              {/* </Route> */}
+                <Route path="/verify" element={<Verify/>} />
             </Routes>
           </BrowserRouter>
 

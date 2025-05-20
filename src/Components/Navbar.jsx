@@ -36,7 +36,7 @@ export const Nav = () => {
           <ul className="flex items-center hidden space-x-8 lg:flex">
             <li>
               <Link
-                to="/product"
+                to="/verify"
                 // aria-label="Our product"
                 // title="Our product"
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
@@ -176,7 +176,7 @@ export const Nav = () => {
                     <ul className="space-y-4">
                       <li>
                         <Link
-                          to="/product"
+                          to="/verify"
                           aria-label="Our product"
                           title="Our product"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-500"

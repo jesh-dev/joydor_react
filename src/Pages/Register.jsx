@@ -41,6 +41,12 @@ function MyForm() {
 
     if (!formData.phone_number.trim()) {
       newErrors.phone_number = "phone number is required";
+    } else if (
+      /^0[789][01]\d{8}$/.test(
+        formData.phone_number
+      )
+    ) {
+      newErrors.phone_number = "Unsupported Password Syntax";
     }
 
     if (!formData.password.trim()) {
