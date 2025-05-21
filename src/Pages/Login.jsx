@@ -4,6 +4,7 @@ import { Footer } from "../Components/Footer";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
+// import Admin from '../Dashboard/AdminDashboard'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -29,9 +30,10 @@ const Login = () => {
       newErrors.password = "password is required";
     } else if (formData.password.trim()) {
       !/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9]{8,}$/.test(
-      formData.password)
-    }else{
-       newErrors.password = 'unsupported password syntax';
+        formData.password
+      );
+    } else {
+      newErrors.password = "unsupported password syntax";
     }
 
     setErrors(newErrors);
@@ -53,11 +55,22 @@ const Login = () => {
         alert(response.data.message);
         console.log(response.data);
         localStorage.setItem("user", JSON.stringify(response.data.user));
+      } else if (response.success === true) {
+        localStorage.setItem("token", response.token);
+        const role = response.user.role;
+        if (role === "admin") {
+          history.push("../Dashboard/AdminDashboard");
+        } else {
+          history.push("../Dashboard/UserDashboard");
+        }
       }
     } catch (error) {
       alert(error.response.data.message);
       console.log(error);
       setErrors(error.response.data.errors);
+      if (response.success === false) {
+        alert(  message == 'wrong credentials');
+      }
     }
   };
   return (

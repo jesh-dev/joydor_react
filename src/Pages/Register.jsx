@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Nav } from "../Components/Navbar";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import { EyeIcon } from "@heroicons/react/24/outline";
@@ -42,11 +42,11 @@ function MyForm() {
     if (!formData.phone_number.trim()) {
       newErrors.phone_number = "phone number is required";
     } else if (
-      /^0[789][01]\d{8}$/.test(
+      /^0[789][01][0-9]\d{8,}$/.test(
         formData.phone_number
       )
     ) {
-      newErrors.phone_number = "Unsupported Password Syntax";
+      newErrors.phone_number = "Unsupported Phone Syntax";
     }
 
     if (!formData.password.trim()) {
@@ -88,11 +88,17 @@ function MyForm() {
       });
       if (response.status === 201) {
         alert(response.data.message);
+      }else if (response.success == true) {
+        history.push('/verify')
       }
     } catch (error) {
       console.log(error);
       alert(error.response.data.message);
       setErrors(error.response.data.errors);
+      if (reponse.success == false) {
+        return 'please verify your email Address'
+      }
+      
     }
   };
   return (
