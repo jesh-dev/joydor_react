@@ -88,16 +88,13 @@ function MyForm() {
       });
       if (response.status === 201) {
         alert(response.data.message);
-      }else if (response.success == true) {
+      }else if (response.success) {
         history.push('/verify')
       }
     } catch (error) {
       console.log(error);
       alert(error.response.data.message);
       setErrors(error.response.data.errors);
-      if (reponse.success == false) {
-        return 'please verify your email Address'
-      }
       
     }
   };

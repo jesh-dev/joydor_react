@@ -4,9 +4,11 @@ import { Footer } from "../Components/Footer";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
+// import { useHistory } from 'react-router-dom'
 // import Admin from '../Dashboard/AdminDashboard'
 
 const Login = () => {
+  // const history = useHistory();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -54,23 +56,23 @@ const Login = () => {
       if (response.status === 201) {
         alert(response.data.message);
         console.log(response.data);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-      } else if (response.success === true) {
-        localStorage.setItem("token", response.token);
-        const role = response.user.role;
-        if (role === "admin") {
-          history.push("../Dashboard/AdminDashboard");
-        } else {
-          history.push("../Dashboard/UserDashboard");
-        }
+        // localStorage.setItem("user", JSON.stringify(response.data.user));
+      // } else if (response.success === true) {
+      //   localStorage.setItem("token", response.token);
+      //   const role = response.user.role;
+      //   if (role === "admin") {
+      //     history.push("../Dashboard/AdminDashboard");
+      //   } else {
+      //     history.push("../Dashboard/UserDashboard");
+      //   }
       }
     } catch (error) {
       alert(error.response.data.message);
       console.log(error);
       setErrors(error.response.data.errors);
-      if (response.success === false) {
-        alert(  message == 'wrong credentials');
-      }
+      // if (response.success === false) {
+      //   alert(  message == 'wrong credentials');
+      // }
     }
   };
   return (
