@@ -88,7 +88,7 @@ function MyForm() {
       });
       if (response.status === 201) {
         alert(response.data.message);
-      }else if (response.success) {
+      }else if (response.success.true) {
         history.push('/verify')
       }
     } catch (error) {
