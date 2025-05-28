@@ -48,6 +48,9 @@ function Verify() {
       });
       if (response.status === 200) {
         alert(response.data.message);
+        resizeTo()
+      }else if (response.success.true) {
+        history.pushState('/verify');
       }
     } catch (error) {
       console.log(error);
