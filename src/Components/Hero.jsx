@@ -1,4 +1,3 @@
-import React from "react";
 import walls from "../assets/walls.jpg"
 import AOS from 'aos';
     import 'aos/dist/aos.css';
@@ -7,7 +6,7 @@ import AOS from 'aos';
 
 export const Header = () => {
     return (
-      <div className="relative  flex flex-col py-16 lg:pt-0 mt-19 lg:flex-col lg:pb-0">
+      <div className="relative dark:bg-black flex flex-col py-16 lg:pt-0 mt-19 lg:flex-col lg:pb-0">
         <div className="flex flex-col items-start w-full max-w-xl px-4 mx-auto lg:px-8 lg:max-w-screen-xl">
           <div className="mb-16 lg:my-40 lg:max-w-lg lg:pr-5">
             <div className="max-w-xl mb-6">

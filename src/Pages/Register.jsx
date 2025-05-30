@@ -4,6 +4,7 @@ import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import { Footer } from "../Components/Footer";
+import { useNavigate } from "react-router-dom";
 
 function MyForm() {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ function MyForm() {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   // Function to Capture user entry
   const handleChange = (e) => {
@@ -88,14 +90,14 @@ function MyForm() {
       });
       if (response.status === 201) {
         alert(response.data.message);
-      }else if (response.success.true) {
-        history.push('/verify')
+        console.log(response);
+      }if (response.data.success === true) {
+        navigate('/verify')
       }
     } catch (error) {
-      console.log(error);
-      alert(error.response.data.message);
-      setErrors(error.response.data.errors);
-      
+      console.log(response);
+      // alert(response.data.message);
+      // setErrors(response.data.error);
     }
   };
   return (
