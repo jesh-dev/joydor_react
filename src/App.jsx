@@ -7,6 +7,8 @@ import Login from './Pages/Login';
 import Verify from './Pages/Verify';
 import UserDashboard from './Dashboard/UserDashboard';
 import AdminDashboard from './Dashboard/AdminDashboard';
+import PaystackForm from './Pages/PaystackForm';
+import PaymentSuccess from './Pages/PaymentSuccess';
 
 
 const App = () => {
@@ -23,6 +25,8 @@ const App = () => {
                 <Route path="/verify" element={ <Verify/> } />
                 <Route path="/admin" element={ <AdminDashboard/> } />
                 <Route path="/user" element={ <UserDashboard/> } />
+        <Route path="/paystack" element={<PaystackForm />} />
+        <Route path="/payment/success" element={<PaymentSuccess />} />
             </Routes>
           </BrowserRouter>
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Nav } from "../Components/Navbar";
 import axios from "axios";
 import { Footer } from "../Components/Footer";
+import { useNavigate } from 'react-router-dom';
 
 function Verify() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function Verify() {
     code: "",
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   // Function to Capture user entry
   const handleChange = (e) => {
@@ -48,14 +50,14 @@ function Verify() {
       });
       if (response.status === 200) {
         alert(response.data.message);
-        resizeTo()
-      }else if (response.success.true) {
-        history.pushState('/verify');
+        console.log(response);
+      }if (response.data.success === true) {
+        navigate('/login');
       }
     } catch (error) {
       console.log(error);
       alert(error.response.data.message);
-      setErrors(error.response.data.errors);
+      // setErrors(error.response.data.error);
     }
   };
   return (

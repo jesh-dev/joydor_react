@@ -92,12 +92,12 @@ function MyForm() {
         alert(response.data.message);
         console.log(response);
       }if (response.data.success === true) {
-        navigate('/verify')
+        navigate('/verify');
       }
     } catch (error) {
-      console.log(response);
-      // alert(response.data.message);
-      // setErrors(response.data.error);
+      console.log(error);
+      alert(response.data.message);
+      setErrors(error.response.data.error);
     }
   };
   return (

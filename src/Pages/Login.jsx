@@ -5,7 +5,6 @@ import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
-// import Admin from '../Dashboard/AdminDashboard'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -65,21 +64,18 @@ const Login = () => {
 
       }
     } catch (error) {
-      // alert(response.data.message);
-      // console.log(response.data.message);
-      // setErrors(response.data.message);
-      if (response.data.success === false) {
-        alert('wrong credentials');
-      }
+      alert(error.response.data.message);
+      console.log(error);
+      setErrors(response.data.message);
     }
   };
   return (
     <>
       <Nav />
-      <div className="mt-30">
+      <div className="mt-30 bg-white">
         <form
           onSubmit={handleSubmit}
-          className="max-w-md mx-auto p-6 rounded shadow-md bg-gradient-to-r from-gray-300 to-orange-700"
+          className="max-w-md mx-auto p-6 rounded-xl shadow-xl shadow-black/30 bg-gradient-to-r from-gray-300 to-orange-700"
         >
           <div className="font-bold text-3xl flex justify-center text-white uppercase ">
             Sign in
@@ -159,7 +155,7 @@ const Login = () => {
           text-white font-semibold py-2 px-4 rounded-lg
           transition-all delay-300 duration-300 transform hover:scale-[1.05] 
           focus:outline-none focus:shadow-outline
-          shadow-md
+          shadow-md active:scale-[1.05]
           "
             type="submit"
           >
