@@ -47,23 +47,30 @@ const Login = () => {
         email: formData.email.trim(),
         password: formData.password,
       });
-      // console.log(response);
-      if (response.status === 200) {
-        alert(response.data.message);
-        console.log(response);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-      }
-      if (response.data.success === true) {
-        localStorage.setItem("token", response.data.token);
-        const role = response.data.user.role;
-        if (role === "admin") {
-          navigate("/admin");
+      const verified = response.data.user.email_verified_at
+      if (verified === null) {
+        console.log('Please verify your email');
+          alert('Please verify your email');
         } else {
-          navigate("/user");
-        }
 
+          if (response.status === 200) {
+            alert(response.data.message);
+            console.log(response);
+            localStorage.setItem("user", JSON.stringify(response.data.user));
+          }
+          
+          if (response.data.success === true) {
+              localStorage.setItem("token", response.data.token);
+              const role = response.data.user.role;
+             if (role === "admin") {
+                navigate("/admin");
+              } else {
+                navigate("/user");
+              }
+        }          
+        
       }
-    } catch (error) {
+      } catch (error) {
       alert(error.response.data.message);
       console.log(error);
       setErrors(response.data.message);

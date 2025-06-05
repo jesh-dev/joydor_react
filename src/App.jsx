@@ -5,10 +5,17 @@ import MyForm from './Pages/Register';
 import { Content } from './Pages/Product';
 import Login from './Pages/Login';
 import Verify from './Pages/Verify';
-import UserDashboard from './Dashboard/UserDashboard';
+// import UserDashboard from './Dashboard/UserDashboard';
+
+
+
 import AdminDashboard from './Dashboard/AdminDashboard';
-import PaystackForm from './Pages/PaystackForm';
-import PaymentSuccess from './Pages/PaymentSuccess';
+import Overview from './Dashboard/Overview';
+import Payment from './Dashboard/Payment';
+import History from './Dashboard/History';
+import Layout from './Dashboard/UserDashboard';
+// import PaystackForm from './Pages/PaystackForm';
+// import PaymentSuccess from './Pages/PaymentSuccess';
 
 
 const App = () => {
@@ -24,9 +31,13 @@ const App = () => {
                 <Route path="/login" element={<Login/>} />
                 <Route path="/verify" element={ <Verify/> } />
                 <Route path="/admin" element={ <AdminDashboard/> } />
-                <Route path="/user" element={ <UserDashboard/> } />
-        <Route path="/paystack" element={<PaystackForm />} />
-        <Route path="/payment/success" element={<PaymentSuccess />} />
+                <Route path="/user" element={ <Layout/> } />
+                <Route path='/overview' element={<Overview/>}/>
+                <Route path='/payment' element={<Payment/>}/>
+                <Route path='/history' element={<History/>}/>
+                {/* <Route path='' element={}/> */}
+        {/* <Route path="/paystack" element={<PaystackForm />} /> */}
+        {/* <Route path="/payment/success" element={<PaymentSuccess />} /> */}
             </Routes>
           </BrowserRouter>
 
