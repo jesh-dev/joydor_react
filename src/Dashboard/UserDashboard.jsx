@@ -1,6 +1,7 @@
 // src/components/Layout.jsx
 import { useState, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Layout() {
   const [user, setUser] = useState(null);

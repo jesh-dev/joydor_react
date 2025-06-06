@@ -14,8 +14,8 @@ import Overview from './Dashboard/Overview';
 import Payment from './Dashboard/Payment';
 import History from './Dashboard/History';
 import Layout from './Dashboard/UserDashboard';
-// import PaystackForm from './Pages/PaystackForm';
-// import PaymentSuccess from './Pages/PaymentSuccess';
+import PaystackForm from './Pages/PaystackForm';
+import PaymentSuccess from './Pages/PaymentSuccess';
 
 
 const App = () => {
@@ -36,8 +36,8 @@ const App = () => {
                 <Route path='/payment' element={<Payment/>}/>
                 <Route path='/history' element={<History/>}/>
                 {/* <Route path='' element={}/> */}
-        {/* <Route path="/paystack" element={<PaystackForm />} /> */}
-        {/* <Route path="/payment/success" element={<PaymentSuccess />} /> */}
+        <Route path="/paystack" element={<PaystackForm />} />
+        <Route path="/payment/success" element={<PaymentSuccess />} />
             </Routes>
           </BrowserRouter>
 

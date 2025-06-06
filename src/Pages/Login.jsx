@@ -82,12 +82,12 @@ const Login = () => {
       <div className="mt-30 bg-white">
         <form
           onSubmit={handleSubmit}
-          className="max-w-md mx-auto p-6 rounded-xl shadow-xl shadow-black/30 bg-gradient-to-r from-gray-300 to-orange-700"
+          className="max-w-md mx-auto p-6 rounded-xl shadow-xl shadow-black/30 "
         >
-          <div className="font-bold text-3xl flex justify-center text-white uppercase ">
+          <div className="font-bold text-3xl flex justify-center text-black uppercase ">
             Sign in
           </div>
-          <div className="flex justify-center font-bold text-white">
+          <div className="flex justify-center font-bold text-black">
             <p>Login to your Account</p>
           </div>
 
