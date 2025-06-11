@@ -7,6 +7,7 @@ import { Footer } from "../Components/Footer";
 import { useNavigate } from "react-router-dom";
 
 function MyForm() {
+  // const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -14,8 +15,8 @@ function MyForm() {
     phone_number: "",
     password: "",
     confirmPassword: "",
-    // gender: "",
-    // role: "",
+    gender: "",
+    role: "user",
   });
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
@@ -43,11 +44,7 @@ function MyForm() {
 
     if (!formData.phone_number.trim()) {
       newErrors.phone_number = "phone number is required";
-    } else if (
-      /^0[789][01][0-9]\d{8,}$/.test(
-        formData.phone_number
-      )
-    ) {
+    } else if (/^0[789][01][0-9]\d{8,}$/.test(formData.phone_number)) {
       newErrors.phone_number = "Unsupported Phone Syntax";
     }
 
@@ -91,8 +88,9 @@ function MyForm() {
       if (response.status === 201) {
         alert(response.data.message);
         console.log(response);
-      }if (response.data.success === true) {
-        navigate('/verify');
+      }
+      if (response.data.success === true) {
+        navigate('/verify')
       }
     } catch (error) {
       console.log(error);
@@ -106,7 +104,7 @@ function MyForm() {
       <div className="mt-30">
         <form
           onSubmit={handleSubmit}
-          className="max-w-md mx-auto p-6 rounded shadow-md bg-gradient-to-r from-gray-400 to-violet-700"
+          className="max-w-md mx-auto p-6 rounded shadow-xl shadow-black/30 bg-white"
         >
           <div className="font-bold text-3xl flex justify-center text-white uppercase ">
             Sign Up
@@ -317,114 +315,20 @@ function MyForm() {
             </select>
           </div>
 
-          {/*<div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="gender"
-              onChange={handleChange}
-                
-            >
-              Gender
-             </label>
-            <div className="flex items-center">
-              <input
-                type="radio"
-                id="male"
-                name="gender"
-                value={formData.gender}
-                className="mr-2"
-              />
-              <label htmlFor="male" className="mr-4">
-                Male
-              </label>
-
-              <input
-                type="radio"
-                id="female"
-                name="gender"
-                value={formData.gender}
-                className="mr-2"
-              />
-              <label htmlFor="female">Female</label>
-              <input
-                type="radio"
-                id="other"
-                name="gender"
-                value={formData.gender}
-                className="ml-4 mr-2"
-              />
-              <label htmlFor="other">Other</label>
-            </div>
-          </div> */}
-
-          {/* Role */}
-
-          <div className="mb-4">
-            <label
-              htmlFor="role"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Role:
-            </label>
-            <select
-              name="role"
-              id="role"
-              value={formData.role}
-              onChange={handleChange}
-              className="shadow appearance-none border rounded 
-            w-full py-2 px-3 text-gray-700 leading-tight bg-white/50
-             focus:bg-white focus:outline-blue-700 focus:shadow-outline"
-            >
-              <option value="">--Select Role--</option>
-              <option value="user">User</option>
-              <option value="vendor">Vendor</option>
-            </select>
-          </div>
-
-          {/* <div className="mb-4">
-            <label
-              onChange={handleChange}
-                value={formData.role}
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="gender"
-            >
-              Role
-            </label>
-            <div className="flex items-center">
-              <input
-                type="radio"
-                id="User"
-                name="role"
-                value="user"
-                className="mr-2"
-              />
-              <label htmlFor="user" className="mr-4">
-                User
-              </label>
-
-              <input
-                type="radio"
-                id="vendor"
-                name="role"
-                value="vendor"
-                className="mr-2"
-              />
-              <label htmlFor="vendor">Vendor</label>
-            </div>
-          </div> */}
-
-          <button
-            className="bg-gradient-to-r from-blue-500 
+          <div className="p-6">
+            <button
+              className="bg-gradient-to-r from-blue-500 
             to-violet-600 hover:bg-gradient-to-l hover:from-bg-violet-700 hover:to-bg-blue-700
             text-white font-semibold py-2 px-4 rounded-lg
             transition-all duration-200 transform hover:scale-[1.02] 
             focus:outline-none focus:shadow-outline
             shadow-md
             "
-            type="submit"
-          >
-            Create Account
-          </button>
+              type="submit"
+            >
+              Create Account
+            </button>
+          </div>
         </form>
       </div>
 

@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Nav } from "../Components/Navbar";
 import { Footer } from "../Components/Footer";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
+import Modal from "../Components/Modal";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false)
 
   const [formData, setFormData] = useState({
     email: "",
@@ -73,7 +75,7 @@ const Login = () => {
       } catch (error) {
       alert(error.response.data.message);
       console.log(error);
-      setErrors(response.data.message);
+      // setErrors(response.data.message);
     }
   };
   return (
@@ -165,9 +167,13 @@ const Login = () => {
           shadow-md active:scale-[1.05]
           "
             type="submit"
+            onClick={()=> setOpen(true)}
           >
             Login
           </button>
+          {/* <Modal open={open} onclose={() => setOpen(false)}>
+                   <h1>Hello</h1>
+          </Modal> */}
         </form>
       </div>
 
