@@ -41,7 +41,7 @@ const App = () => {
                 {/* <Route path='' element={}/> */}
         <Route path="/paystack" element={<PaystackForm />} />
         
-        <Route path="/payment/success" element={<PaymentSuccess />} />
+        {/* <Route path="/payment/success" element={<PaymentSuccess />} /> */}
                 <Route path="/admin" element={ <AdminDashboard/> } />
             </Routes>
           </BrowserRouter>
