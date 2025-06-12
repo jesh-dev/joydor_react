@@ -10,10 +10,9 @@ import Modal from "../Components/Modal";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth(); // Add this line below useNavigate
+  const { login } = useAuth(); // adding this below useNavigate make the const function to automatically use authentication 
   const [showModal, setShowModal] = useState(false);
 
-  const [open, setOpen] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",

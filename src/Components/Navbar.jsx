@@ -34,22 +34,22 @@ export const Nav = () => {
             </span>
           </a>
           <ul className="flex items-center hidden space-x-8 lg:flex">
-            <li>
-              <Link
+            {/* <li></li> */}
+              {/* <Link
                 to="/verify"
                 // aria-label="Our product"
                 // title="Our product"
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Product
-              </Link>
+              </Link> */}
               {/* <a
                 href="/"
                 
               >
                 Product
               </a> */}
-            </li>
+            {/* </li> */}
             <li>
               <a
                 href="/"
