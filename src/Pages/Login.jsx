@@ -4,12 +4,16 @@ import { Footer } from "../Components/Footer";
 import { EyeSlashIcon } from "@heroicons/react/24/solid";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 import Modal from "../Components/Modal";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false)
+  const { login } = useAuth(); // Add this line below useNavigate
+  const [showModal, setShowModal] = useState(false);
+
+  const [open, setOpen] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -49,30 +53,34 @@ const Login = () => {
         email: formData.email.trim(),
         password: formData.password,
       });
-      const verified = response.data.user.email_verified_at
+      const verified = response.data.user.email_verified_at;
       if (verified === null) {
-        console.log('Please verify your email');
-          alert('Please verify your email');
-        } else {
+        console.log("Please verify your email");
+        alert("Please verify your email");
+      } else {
+        if (response.status === 200 && response.data.success) {
+          const user = response.data.user;
+          const token = response.data.token;
 
-          if (response.status === 200) {
-            alert(response.data.message);
-            console.log(response);
-            localStorage.setItem("user", JSON.stringify(response.data.user));
-          }
-          
-          if (response.data.success === true) {
-              localStorage.setItem("token", response.data.token);
-              const role = response.data.user.role;
-             if (role === "admin") {
-                navigate("/admin");
-              } else {
-                navigate("/user");
-              }
-        }          
-        
+          // Save to localStorage
+          localStorage.setItem("token", token);
+          localStorage.setItem("user", JSON.stringify(user));
+          setShowModal(true);
+
+          // ✅ Set in AuthContext
+          login(user);
+
+          setTimeout(() => {
+            // ✅ Navigate based on role
+            if (user.role === "admin") {
+              navigate("/admin");
+            } else {
+              navigate("/user");
+            }
+          }, 3000);
+        }
       }
-      } catch (error) {
+    } catch (error) {
       alert(error.response.data.message);
       console.log(error);
       // setErrors(response.data.message);
@@ -167,14 +175,34 @@ const Login = () => {
           shadow-md active:scale-[1.05]
           "
             type="submit"
-            onClick={()=> setOpen(true)}
           >
             Login
           </button>
-          {/* <Modal open={open} onclose={() => setOpen(false)}>
-                   <h1>Hello</h1>
-          </Modal> */}
         </form>
+
+        <Modal open={showModal} onClose={() => setShowModal(false)}>
+          <div className="flex flex-col items-center space-y-3">
+            <svg
+              className="w-10 h-10 text-green-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+            <h2 className="text-xl font-semibold text-center">
+              Login Successful!
+            </h2>
+            <p className="text-center text-sm">
+              Redirecting to your dashboard...
+            </p>
+          </div>
+        </Modal>
       </div>
 
       <Footer />

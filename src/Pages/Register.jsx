@@ -90,7 +90,7 @@ function MyForm() {
         console.log(response);
       }
       if (response.data.success === true) {
-        navigate('/verify')
+        navigate("/verify");
       }
     } catch (error) {
       console.log(error);

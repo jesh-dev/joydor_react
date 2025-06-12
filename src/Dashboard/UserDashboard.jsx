@@ -27,6 +27,7 @@ export default function Layout() {
             <Link to="/" className="block hover:text-blue-600">🏠 Overview</Link>
             <Link to="/payment" className="block hover:text-blue-600">💳 Make Payment</Link>
             <Link to="/history" className="block hover:text-blue-600">📄 Payment History</Link>
+            <Link to="/logout" className="block hover:text-blue-600">📄 Logout</Link>
           </nav>
         </div>
       </aside>

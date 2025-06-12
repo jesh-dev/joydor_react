@@ -1,19 +1,31 @@
+// Components/Modal.jsx
+import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Modal({ open, onclose, children}) {
+const Modal = ({ open, onClose, children }) => {
   return (
-    //backdrop
-    <div onClick={onclose}
-className={` inset-0 flex justify-center w-100 h-30 items-center
-transition-colors 
-${open ? "visible bg-black/20 backdrop-blur-xl" : "invisible"}`}
-    >
-        {/* modal */}
-        <div className= {`bg-white rounded-xl shadow p-6
-        
-        transition-all ${open ? "scale-100 opacity-100" : "scale-125 opacity-0"} `}>
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          <motion.div
+            className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md"
+            initial={{ scale: 0.8, opacity: 0, y: 100 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.8, opacity: 0, y: 100 }}
+            transition={{ duration: 0.3 }}
+            onClick={(e) => e.stopPropagation()} // prevent click from closing modal
+          >
+            {children}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
 
-        </div>
-        {children}
-    </div>
-  )
-}
+export default Modal;
