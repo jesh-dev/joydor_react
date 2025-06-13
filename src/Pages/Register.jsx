@@ -94,8 +94,8 @@ function MyForm() {
       }
     } catch (error) {
       console.log(error);
-      alert(response.data.message);
-      setErrors(error.response.data.error);
+      alert(error.response.data.message);
+      // setErrors(error.response.data.error);
     }
   };
   return (

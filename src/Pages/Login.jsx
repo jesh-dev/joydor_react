@@ -180,7 +180,7 @@ const Login = () => {
         </form>
 
         <Modal open={showModal} onClose={() => setShowModal(false)}>
-          <div className="flex flex-col items-center space-y-3">
+          <div className="flex flex-col backdrop-blur-md items-center space-y-3">
             <svg
               className="w-10 h-10 text-green-500"
               fill="none"

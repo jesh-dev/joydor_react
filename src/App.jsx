@@ -3,16 +3,16 @@ import Home from "./Home";
 import MyForm from "./Pages/Register";
 import Login from "./Pages/Login";
 import Verify from "./Pages/Verify";
-import User from "./Dashboard/UserDashboard";
 import AdminDashboard from "./Dashboard/AdminDashboard";
 import Paymentform from "./Pages/payments/Payment";
 import History from "./Dashboard/History";
 import PaystackForm from "./Pages/PaystackForm";
 import Contact from "./Pages/Contact";
 import About from "./Pages/About";
-import ProtectedRoute from "./ProtectedRoute"; // ✅ Import this
 import Logout from "./Pages/Logout";
-import GuestRoute from "./GuestRoute";
+import ProtectedRoute from "./ProtectedRoute"
+// import GuestRoute from "./GuestRoute";
+import Layout from "./Dashboard/UserDashboard";
 
 {
   /* <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
@@ -29,25 +29,23 @@ const App = () => {
         <Route
           path="/register"
           element={
-            <GuestRoute>
+            // <GuestRoute>
               <MyForm />
-            </GuestRoute>
+            //</GuestRoute> 
           }
         />
         <Route
           path="/login"
           element={
-            <GuestRoute>
               <Login />
-            </GuestRoute>
           }
         />
         <Route
           path="/verify"
           element={
-            <GuestRoute>
+            // <GuestRoute>
               <Verify />
-            </GuestRoute>
+            // </GuestRoute>
           }
         />
         <Route path="/logout" element={<Logout />} />
@@ -56,9 +54,9 @@ const App = () => {
         <Route
           path="/user"
           element={
-            <ProtectedRoute role="user">
-              <User />
-            </ProtectedRoute>
+           <ProtectedRoute>
+            <Layout/>
+           </ProtectedRoute>
           }
         />
 
